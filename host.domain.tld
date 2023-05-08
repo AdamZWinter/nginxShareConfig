@@ -1,0 +1,21 @@
+    server {
+        listen       80;
+        listen       [::]:80;
+        server_name  {{host.domain.tld}};
+
+    	location / {
+            root /var/www/{{username}}/{{project}}/html;
+        }
+
+	location /api/ {
+	    proxy_pass http://localhost:{{port}}/;
+	}
+
+        error_page 404 /404.html;
+        location = /404.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+        }
+    }
