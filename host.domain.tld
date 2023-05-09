@@ -1,15 +1,29 @@
-    server {
+server {
         listen       80;
         listen       [::]:80;
+
         server_name  {{host.domain.tld}};
 
-    	location / {
+        return 301 https://$host$request_uri;
+    }
+
+
+server {
+        listen       443 ssl;
+        listen       [::]:443 ssl;
+
+        server_name  {{host.domain.tld}};
+
+        ssl_certificate         /etc/letsencrypt/live/{{host.domain.tld}}/fullchain.pem;
+        ssl_certificate_key     /etc/letsencrypt/live/{{host.domain.tld}}/privkey.pem;
+
+        location / {
             root /var/www/{{username}}/{{project}}/html;
         }
 
-	location /api/ {
-	    proxy_pass http://localhost:{{port}}/;
-	}
+        location /api/ {
+            proxy_pass http://localhost:{{port}}/;
+        }
 
         error_page 404 /404.html;
         location = /404.html {
@@ -19,3 +33,4 @@
         location = /50x.html {
         }
     }
+
