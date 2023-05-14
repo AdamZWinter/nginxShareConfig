@@ -18,7 +18,7 @@ server {
         ssl_certificate_key     /etc/letsencrypt/live/{{host.domain.tld}}/privkey.pem;
 
         location / {
-            root /var/www/{{username}}/{{project}}/html;
+            root /var/www/{{username}}/public_html;
         }
 
         location /api/ {
