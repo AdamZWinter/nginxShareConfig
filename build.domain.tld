@@ -1,0 +1,38 @@
+server {
+        listen       80;
+        listen       [::]:80;
+
+        server_name  agile.topsecondhost.com;
+
+	return 301 https://$host$request_uri;
+    }
+
+
+server {
+	listen       443 ssl;
+	listen       [::]:443 ssl;
+
+        server_name  agile.topsecondhost.com;
+
+	ssl_certificate		/etc/letsencrypt/live/agile.topsecondhost.com/fullchain.pem;
+	ssl_certificate_key 	/etc/letsencrypt/live/agile.topsecondhost.com/privkey.pem;
+
+    	location / {
+            root /var/www/production/public_html;
+	    try_files $uri /index.html; 
+		#proxy_pass http://localhost:3000/;
+        }
+
+
+	location /api/ {
+	    proxy_pass http://localhost:8080/;
+	}
+
+        error_page 404 /404.html;
+        location = /404.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+        }
+    }
