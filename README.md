@@ -4,18 +4,18 @@ Unfortunately, this readme file may be missing some steps required to get things
 
 The following assumes that you are starting with a fresh Amazon Linux 2023 (or Linux 2 AMI) and nothing has be set up. 
 
-You will want to start with some basic server setup routines:
-Create a 1G swap file:
-sudo fallocate -l 1G /swapfile
-Change its permission to only root could access and change:
-sudo chmod 600 /swapfile
-Make it swap:
-sudo mkswap /swapfile
-Activate:
-sudo swapon /swapfile
-View swap:
-free -m
-
+You will want to start with some basic server setup routines:  
+Create a 1G swap file:  
+sudo fallocate -l 1G /swapfile  
+Change its permission to only root could access and change:  
+sudo chmod 600 /swapfile  
+Make it swap:  
+sudo mkswap /swapfile  
+Activate:  
+sudo swapon /swapfile  
+View swap:  
+free -m  
+  
 Udate repositories:
 sudo yum update
 
